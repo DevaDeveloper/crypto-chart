@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-// import type { PayloadAction } from "@reduxjs/toolkit";
+import type { PayloadAction } from "@reduxjs/toolkit";
 import { InitialChartState } from "./models";
 import getCryptoData from "./ChartService";
 
@@ -28,12 +28,15 @@ export const chartSlice = createSlice({
       state.status = "pending";
       console.log(state.status);
     });
-    builder.addCase(fetchCryptoData.fulfilled, (state, action) => {
-      state.status = "fulfilled";
-      state.data = action.payload;
-      console.log(action.payload);
-      console.log(state.status);
-    });
+    builder.addCase(
+      fetchCryptoData.fulfilled,
+      (state, action: PayloadAction<object>) => {
+        state.status = "fulfilled";
+        state.data = action.payload;
+        console.log(action.payload);
+        console.log(state.status);
+      }
+    );
     builder.addCase(fetchCryptoData.rejected, (state) => {
       state.status = "rejected";
       console.log(state.status);
