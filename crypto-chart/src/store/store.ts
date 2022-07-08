@@ -1,7 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
+import chartReducer from "../features/chart/ChartSlice";
 
 export const store = configureStore({
-  reducer: {},
+  reducer: {
+    chart: chartReducer,
+  },
 });
 
 export type RootState = ReturnType<typeof store.getState>;
