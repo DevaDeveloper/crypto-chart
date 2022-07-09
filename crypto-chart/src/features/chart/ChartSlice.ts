@@ -1,14 +1,19 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-// import type { PayloadAction } from "@reduxjs/toolkit";
 import { InitialChartState } from "./models";
-import getCryptoData from "./ChartService";
-import getCryptoDataJson from "./JSONService";
+import getCryptoData from "./HTTPServices/ChartService";
+import getCryptoDataJson from "./HTTPServices/JSONService";
 
 const initialState: InitialChartState = {
   data: "",
   assetData: [],
   token: "",
   status: "",
+  APRDaily: 0.05,
+  APRStartValue: 6.5,
+  date: 2,
+  TVLDaily: 0.0359,
+  TVLStartValue: Math.floor(Math.random() * 4000),
+  errorMessages: "",
 };
 
 export const fetchCryptoData = createAsyncThunk(
@@ -28,31 +33,21 @@ export const chartSlice = createSlice({
     consoling: () => {
       console.log("data");
     },
-    manualParsing: (state) => {
-      let obj = {};
-      let propertiesSplit = state.data.split(" ");
-      console.log(propertiesSplit());
+    setErrorMessage: (state, action) => {
+      state.errorMessages = action.payload;
     },
   },
   extraReducers: (builder) => {
     // fetch data from api
     builder.addCase(fetchCryptoData.pending, (state) => {
       state.status = "pending";
-      console.log(state.status);
     });
     builder.addCase(fetchCryptoData.fulfilled, (state, action) => {
       state.status = "fulfilled";
-      // console.log(temp[78964]);
-
-      // 78964 - 78972
-
       state.data = action.payload;
-      console.log(action.payload);
-      console.log(state.status);
     });
     builder.addCase(fetchCryptoData.rejected, (state) => {
       state.status = "rejected";
-      console.log(state.status);
     });
 
     // fetch data fro JSON db api
@@ -63,8 +58,6 @@ export const chartSlice = createSlice({
     builder.addCase(fetchCryptoDataJson.fulfilled, (state, action) => {
       state.status = "fulfilled";
       state.assetData = action.payload;
-      console.log(action.payload);
-      console.log(state.status);
     });
     builder.addCase(fetchCryptoDataJson.rejected, (state) => {
       state.status = "rejected";
@@ -73,6 +66,6 @@ export const chartSlice = createSlice({
   },
 });
 
-export const { consoling } = chartSlice.actions;
+export const { consoling, setErrorMessage } = chartSlice.actions;
 
 export default chartSlice.reducer;
