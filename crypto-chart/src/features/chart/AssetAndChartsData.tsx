@@ -17,7 +17,7 @@ import MultipleChart from "../../components/MultipleChart";
 
 const USDT_WBNB_DATA: object[] = [];
 
-const OneAssetData: FC<OneAssetDataProps> = ({ assetData }) => {
+const AssetAndChartsData: FC<OneAssetDataProps> = ({ assetData }) => {
   const { APRDaily, APRStartValue, date, TVLDaily, TVLStartValue } =
     useAppSelector((state) => state.chart);
   const [dataChart, setDataChart] = useState(USDT_WBNB_DATA);
@@ -227,4 +227,4 @@ const OneAssetData: FC<OneAssetDataProps> = ({ assetData }) => {
   );
 };
 
-export default OneAssetData;
+export default AssetAndChartsData;

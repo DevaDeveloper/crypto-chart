@@ -1,7 +1,7 @@
 import React, { FC, useEffect } from "react";
 import { fetchCryptoData, fetchCryptoDataJson } from "./ChartSlice";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
-import OneAssetData from "./OneAssetData";
+import AssetAndChartsData from "./AssetAndChartsData";
 import { Loading } from "./ChartUI/ChartUI";
 
 const Chart: FC = () => {
@@ -29,7 +29,9 @@ const Chart: FC = () => {
       {cryptoData ? (
         cryptoData
           .filter((data) => data.assetId === "BNB_Pancakeswap__USDT-WBNB")
-          .map((data) => <OneAssetData assetData={data} key={data.assetId} />)
+          .map((data) => (
+            <AssetAndChartsData assetData={data} key={data.assetId} />
+          ))
       ) : (
         <Loading>
           CONNECTION ERROR...PLEASE CHECK YOUR INTERNET CONNECTION OR IS YOUR
