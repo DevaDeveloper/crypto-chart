@@ -1,6 +1,9 @@
 .App {
   text-align: center;
 }
+.css-l5lfso canvas {
+  background: "rgb(45,52,85)";
+}
 
 .App-logo {
   height: 40vmin;
