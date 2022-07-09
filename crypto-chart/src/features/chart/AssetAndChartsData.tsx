@@ -60,11 +60,10 @@ const AssetAndChartsData: FC<OneAssetDataProps> = ({ assetData }) => {
 
   // APR data
   const chartReadyData = {
-    // labels: APRHistoryIncrease.map((data) => data.date),
     labels: Aprlabel,
     datasets: [
       {
-        label: "ASSET APR(day",
+        label: "ASSET APR(day)",
         data: APRHistoryIncrease.map((data) => data.ARP),
         backgroundColor: ["rgb(57,89,134, 0.8)"],
         borderColor: "rgb(158,71,198)",
